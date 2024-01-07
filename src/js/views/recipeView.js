@@ -28,6 +28,17 @@ class RecipeView {
 		this.#parentElem.insertAdjacentHTML('afterbegin', html);
 	}
 
+	renderError(msg) {
+		// prettier-ignore
+		const markup = 
+        `<div class="error">
+            <div><svg><use href="${icons}#icon-alert-triangle"></use></svg></div>
+            <p>${msg}</p>
+        </div>`
+		this.#clearParentElem();
+		this.#parentElem.insertAdjacentHTML('afterbegin', markup);
+	}
+
 	addHandlerRender(handler) {
 		['hashchange', 'load'].forEach(evt => window.addEventListener(evt, handler));
 	}
