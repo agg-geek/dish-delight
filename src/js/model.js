@@ -22,6 +22,9 @@ export const loadRecipe = async function (recipeId) {
 			imageUrl: recipe.image_url,
 		};
 	} catch (err) {
-		console.log(err);
+		// any error from newRequest function will be caught here
+		// and then we handle it ourselves here (by printing it)
+		// (even though this is just basic error handling at this point)
+		console.error(`You got an error: ${err}`);
 	}
 };
