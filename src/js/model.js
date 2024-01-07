@@ -25,6 +25,6 @@ export const loadRecipe = async function (recipeId) {
 		// any error from newRequest function will be caught here
 		// and then we handle it ourselves here (by printing it)
 		// (even though this is just basic error handling at this point)
-		console.error(`You got an error: ${err}`);
+		console.error(`You got an error. ${err}`);
 	}
 };

@@ -1,14 +1,19 @@
+const timeout = function (s) {
+	return new Promise(function (_, reject) {
+		setTimeout(function () {
+			reject(new Error(`Request took too long! Timeout after ${s} second`));
+		}, s * 1000);
+	});
+};
+
 export const newRequest = async function (url) {
 	try {
-		const res = await fetch(url);
+		const res = await Promise.race([fetch(url), timeout(0.5)]);
 		const data = await res.json();
 
 		if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-		return data; // this async fn will resolve with data
+		return data;
 	} catch (err) {
-		// if newRequest received any error, we just logged it
-		// and it could not be handled by the actual thing that should handle it
-		// hence pass the error by throwing it further
 		throw err;
 	}
 };
