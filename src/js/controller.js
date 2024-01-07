@@ -11,7 +11,7 @@ const timeout = function (s) {
 	});
 };
 
-const showRecipe = async function () {
+const controlRecipe = async function () {
 	try {
 		const recipeId = window.location.hash.slice(1);
 		if (!recipeId) return;
@@ -26,6 +26,6 @@ const showRecipe = async function () {
 	}
 };
 
-showRecipe();
+controlRecipe();
 
-['hashchange', 'load'].forEach(evt => window.addEventListener(evt, showRecipe));
+['hashchange', 'load'].forEach(evt => window.addEventListener(evt, controlRecipe));
