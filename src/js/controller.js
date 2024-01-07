@@ -2,7 +2,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 // import icons from '../img/icons.svg'; // Normal assets (scripts, etc)
 import icons from 'url:../img/icons.svg'; // non-programming static assets (images, audio, videos)
-console.log(icons); // http://localhost:1234/icons.dfd7a6db.svg?1704634778344
+// console.log(icons); // http://localhost:1234/icons.dfd7a6db.svg?1704634778344
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -14,8 +14,24 @@ const timeout = function (s) {
 	});
 };
 
+function displaySpinner(parentElem) {
+	// prettier-ignore
+	const html = 
+    `<div class="spinner">
+        <svg>
+            <use href="${icons}.svg#icon-loader"></use>
+        </svg>
+    </div>`;
+
+	parentElem.innerHTML = '';
+	parentElem.insertAdjacentHTML('afterbegin', html);
+}
+
 const showRecipe = async function () {
 	try {
+		// display spinner while loading the recipe
+		displaySpinner(recipeContainer);
+
 		// Loading recipe
 
 		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza'); // all recipes
@@ -44,7 +60,7 @@ const showRecipe = async function () {
 			imageUrl: recipe.image_url,
 		};
 
-		console.log(recipe);
+		// console.log(recipe);
 
 		// =====================================================================
 		// Render recipe
