@@ -109,7 +109,7 @@ const showRecipe = async function () {
                         <span class="recipe__unit">${ing.unit}</span>
                         ${ing.description}
                     </div>
-                </li>`)}
+                </li>`).join('')}
             </ul>
         </div>
 
