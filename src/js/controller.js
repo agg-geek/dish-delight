@@ -36,10 +36,15 @@ const showRecipe = async function () {
 
 		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza'); // all recipes
 
-		const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'); // pizza
+		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'); // pizza
 		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd0b8'); // chocolate
 
 		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886zzzz'); // bad id
+
+		console.log(window.location.hash); // #5ed6604591c37cdc054bc886
+
+		const recipeId = window.location.hash.slice(1);
+		const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`);
 		const data = await res.json();
 		// console.log(data);
 
@@ -159,3 +164,5 @@ const showRecipe = async function () {
 };
 
 showRecipe();
+
+window.addEventListener('hashchange', showRecipe);
