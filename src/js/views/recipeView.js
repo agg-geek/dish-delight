@@ -11,6 +11,19 @@ class RecipeView {
 		this.#parentElem.insertAdjacentHTML('afterbegin', this.#generateMarkup());
 	}
 
+	renderSpinner() {
+		// prettier-ignore
+		const html = 
+            `<div class="spinner">
+                <svg>
+                    <use href="${icons}.svg#icon-loader"></use>
+                </svg>
+            </div>`;
+
+		this.#parentElem.innerHTML = '';
+		this.#parentElem.insertAdjacentHTML('afterbegin', html);
+	}
+
 	// notice private method
 	#generateMarkup() {
 		return `<figure class="recipe__fig">

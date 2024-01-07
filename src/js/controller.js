@@ -14,19 +14,6 @@ const timeout = function (s) {
 	});
 };
 
-function displaySpinner(parentElem) {
-	// prettier-ignore
-	const html = 
-    `<div class="spinner">
-        <svg>
-            <use href="${icons}.svg#icon-loader"></use>
-        </svg>
-    </div>`;
-
-	parentElem.innerHTML = '';
-	parentElem.insertAdjacentHTML('afterbegin', html);
-}
-
 const showRecipe = async function () {
 	try {
 		// keep this part before you display the spinner
@@ -35,7 +22,7 @@ const showRecipe = async function () {
 		if (!recipeId) return;
 
 		// display spinner while loading the recipe
-		displaySpinner(recipeContainer);
+		recipeView.renderSpinner();
 
 		// Loading recipe
 		await model.loadRecipe(recipeId); // notice async fn calling other async fn
