@@ -24,22 +24,22 @@ export default class View {
 		this._parentElem.insertAdjacentHTML('afterbegin', html);
 	}
 
-	renderError(msg) {
+	renderMessage(msg = this._message) {
 		// prettier-ignore
 		const markup = 
-        `<div class="error">
-            <div><svg><use href="${icons}#icon-alert-triangle"></use></svg></div>
+        `<div class="message">
+            <div><svg><use href="${icons}#icon-smile"></use></svg></div>
             <p>${msg}</p>
         </div>`
 		this._clearParentElem();
 		this._parentElem.insertAdjacentHTML('afterbegin', markup);
 	}
 
-	renderMessage(msg) {
+	renderError(msg = this._errorMessage) {
 		// prettier-ignore
 		const markup = 
-        `<div class="message">
-            <div><svg><use href="${icons}#icon-smile"></use></svg></div>
+        `<div class="error">
+            <div><svg><use href="${icons}#icon-alert-triangle"></use></svg></div>
             <p>${msg}</p>
         </div>`
 		this._clearParentElem();

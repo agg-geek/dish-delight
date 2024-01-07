@@ -4,6 +4,8 @@ import View from './View';
 
 class RecipeView extends View {
 	_parentElem = document.querySelector('.recipe');
+	_message = '';
+	_errorMessage = 'We could not find that recipe. Please try another one!';
 
 	addHandlerRender(handler) {
 		['hashchange', 'load'].forEach(evt => window.addEventListener(evt, handler));
