@@ -24,6 +24,10 @@ class RecipeView {
 		this.#parentElem.insertAdjacentHTML('afterbegin', html);
 	}
 
+	addHandlerRender(handler) {
+		['hashchange', 'load'].forEach(evt => window.addEventListener(evt, handler));
+	}
+
 	#generateMarkup() {
 		return `<figure class="recipe__fig">
             <img src="${this.#recipeData.imageUrl}" alt="${this.#recipeData.title}" class="recipe__img" />
