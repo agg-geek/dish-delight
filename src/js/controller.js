@@ -19,8 +19,15 @@ const controlRecipe = async function () {
 	}
 };
 
-function init() {
+const controlSearchResults = async function () {
+	await model.loadSearchResults('pizza');
+	console.log(model.state.search.results);
+};
+
+controlSearchResults();
+
+const init = function () {
 	recipeView.addHandlerRender(controlRecipe);
-}
+};
 
 init();
