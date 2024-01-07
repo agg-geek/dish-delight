@@ -13,7 +13,7 @@ class SearchView {
 
 	addHandlerSearch(handler) {
 		this._parentElem.addEventListener('submit', function (evt) {
-			evt.preventDefault(); // since parentElem is a form
+			evt.preventDefault();
 			handler();
 		});
 	}

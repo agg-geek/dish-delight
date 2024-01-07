@@ -5,10 +5,6 @@ class ResultsView extends View {
 	_parentElem = document.querySelector('.results');
 
 	_generateMarkup() {
-		// we call resultsView.render(<searchResultsData>) in controller
-		// .render (inherited from parent class View) then assigns that data
-		//  to _data (also inherited) and then we simply render that data
-		// things are called preview simply because of the classname
 		console.log(this._data);
 		return this._data.map(preview => this._generateMarkupPreview(preview)).join('');
 	}
