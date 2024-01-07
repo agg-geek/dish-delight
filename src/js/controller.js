@@ -29,6 +29,11 @@ function displaySpinner(parentElem) {
 
 const showRecipe = async function () {
 	try {
+		// keep this part before you display the spinner
+		// so that the default msg when no recipe is opened keeps showing
+		const recipeId = window.location.hash.slice(1);
+		if (!recipeId) return;
+
 		// display spinner while loading the recipe
 		displaySpinner(recipeContainer);
 
@@ -41,9 +46,6 @@ const showRecipe = async function () {
 
 		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886zzzz'); // bad id
 
-		console.log(window.location.hash); // #5ed6604591c37cdc054bc886
-
-		const recipeId = window.location.hash.slice(1);
 		const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`);
 		const data = await res.json();
 		// console.log(data);
