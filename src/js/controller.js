@@ -1,8 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-// import icons from '../img/icons.svg'; // Normal assets (scripts, etc)
-import icons from 'url:../img/icons.svg'; // non-programming static assets (images, audio, videos)
-// console.log(icons); // http://localhost:1234/icons.dfd7a6db.svg?1704634778344
+import * as model from './model.js';
+import icons from 'url:../img/icons.svg';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -38,36 +37,8 @@ const showRecipe = async function () {
 		displaySpinner(recipeContainer);
 
 		// Loading recipe
-
-		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza'); // all recipes
-
-		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'); // pizza
-		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd0b8'); // chocolate
-
-		// const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886zzzz'); // bad id
-
-		const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`);
-		const data = await res.json();
-		// console.log(data);
-
-		if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-
-		let { recipe } = data.data;
-		// console.log(recipe);
-
-		recipe = {
-			id: recipe.id,
-			title: recipe.title,
-			servings: recipe.servings,
-			publisher: recipe.publisher,
-			ingredients: recipe.ingredients,
-			// remove underscores
-			cookingTime: recipe.cooking_time,
-			sourceUrl: recipe.source_url,
-			imageUrl: recipe.image_url,
-		};
-
-		// console.log(recipe);
+		await model.loadRecipe(recipeId); // notice async fn calling other async fn
+		const { recipe } = model.state;
 
 		// =====================================================================
 		// Render recipe
