@@ -165,4 +165,7 @@ const showRecipe = async function () {
 
 showRecipe();
 
-window.addEventListener('hashchange', showRecipe);
+// If page is loaded containing a recipe link already:
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
+['hashchange', 'load'].forEach(evt => window.addEventListener(evt, showRecipe));
