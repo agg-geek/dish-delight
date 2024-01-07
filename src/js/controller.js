@@ -2,9 +2,6 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
-import icons from 'url:../img/icons.svg';
-
-const recipeContainer = document.querySelector('.recipe');
 
 const timeout = function (s) {
 	return new Promise(function (_, reject) {
@@ -16,18 +13,13 @@ const timeout = function (s) {
 
 const showRecipe = async function () {
 	try {
-		// keep this part before you display the spinner
-		// so that the default msg when no recipe is opened keeps showing
 		const recipeId = window.location.hash.slice(1);
 		if (!recipeId) return;
 
-		// display spinner while loading the recipe
 		recipeView.renderSpinner();
 
-		// Loading recipe
-		await model.loadRecipe(recipeId); // notice async fn calling other async fn
+		await model.loadRecipe(recipeId);
 
-		// Render recipe
 		recipeView.render(model.state.recipe);
 	} catch (err) {
 		console.log(err);
@@ -36,7 +28,4 @@ const showRecipe = async function () {
 
 showRecipe();
 
-// If page is loaded containing a recipe link already:
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe);
 ['hashchange', 'load'].forEach(evt => window.addEventListener(evt, showRecipe));

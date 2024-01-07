@@ -1,9 +1,8 @@
 import icons from 'url:../../img/icons.svg';
 
-// we will have a parent class View and RecipeView etc will inherit from it
 class RecipeView {
-	#parentElem = document.querySelector('.recipe'); // used to render the recipe, spinner, etc
-	#recipeData; // will be used to store the recipe data
+	#parentElem = document.querySelector('.recipe');
+	#recipeData;
 
 	render(recipeData) {
 		this.#recipeData = recipeData;
@@ -24,7 +23,6 @@ class RecipeView {
 		this.#parentElem.insertAdjacentHTML('afterbegin', html);
 	}
 
-	// notice private method
 	#generateMarkup() {
 		return `<figure class="recipe__fig">
             <img src="${this.#recipeData.imageUrl}" alt="${this.#recipeData.title}" class="recipe__img" />
@@ -118,6 +116,4 @@ class RecipeView {
 	}
 }
 
-// we don't export the entire class and instead only the obj
-// we then call methods on this obj in controller to render stuff
 export default new RecipeView();
