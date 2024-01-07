@@ -1,5 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { API_URL } from './config';
+import { newRequest } from './helpers';
 
 export const state = {
 	recipe: {},
@@ -7,13 +8,9 @@ export const state = {
 
 export const loadRecipe = async function (recipeId) {
 	try {
-		const res = await fetch(`${API_URL}/${recipeId}`);
-		const data = await res.json();
-
-		if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+		const data = await newRequest(`${API_URL}/${recipeId}`);
 
 		const { recipe } = data.data;
-
 		state.recipe = {
 			id: recipe.id,
 			title: recipe.title,
