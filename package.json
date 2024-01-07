@@ -1,0 +1,28 @@
+{
+	"name": "forkify",
+	"version": "1.0.0",
+	"description": "Forkify recipes app",
+	"main": "index.js",
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/agg-geek/jonas-forkify.git"
+	},
+	"author": "Abhinav Aggarwal",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/agg-geek/jonas-forkify/issues"
+	},
+	"homepage": "https://github.com/agg-geek/jonas-forkify#readme",
+	"devDependencies": {
+		"@parcel/transformer-sass": "^2.11.0",
+		"parcel": "^2.11.0"
+	},
+	"dependencies": {
+		"core-js": "^3.35.0",
+		"regenerator-runtime": "^0.14.1"
+	}
+}
