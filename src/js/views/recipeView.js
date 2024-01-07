@@ -5,22 +5,26 @@ class RecipeView {
 	#parentElem = document.querySelector('.recipe');
 	#recipeData;
 
+	#clearParentElem() {
+		this.#parentElem.innerHTML = '';
+	}
+
 	render(recipeData) {
 		this.#recipeData = recipeData;
-		this.#parentElem.innerHTML = '';
+		this.#clearParentElem();
 		this.#parentElem.insertAdjacentHTML('afterbegin', this.#generateMarkup());
 	}
 
 	renderSpinner() {
 		// prettier-ignore
 		const html = 
-            `<div class="spinner">
-                <svg>
-                    <use href="${icons}.svg#icon-loader"></use>
-                </svg>
-            </div>`;
+        `<div class="spinner">
+        <svg>
+        <use href="${icons}.svg#icon-loader"></use>
+        </svg>
+        </div>`;
 
-		this.#parentElem.innerHTML = '';
+		this.#clearParentElem();
 		this.#parentElem.insertAdjacentHTML('afterbegin', html);
 	}
 
