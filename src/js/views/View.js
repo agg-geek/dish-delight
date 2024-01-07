@@ -8,6 +8,8 @@ export default class View {
 	}
 
 	render(data) {
+		if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+
 		this._data = data;
 		this._clearParentElem();
 		this._parentElem.insertAdjacentHTML('afterbegin', this._generateMarkup());
@@ -15,7 +17,7 @@ export default class View {
 
 	renderSpinner() {
 		// prettier-ignore
-		const html = 
+		const html =
         `<div class="spinner">
             <svg><use href="${icons}.svg#icon-loader"></use></svg>
         </div>`;
@@ -26,7 +28,7 @@ export default class View {
 
 	renderMessage(msg = this._message) {
 		// prettier-ignore
-		const markup = 
+		const markup =
         `<div class="message">
             <div><svg><use href="${icons}#icon-smile"></use></svg></div>
             <p>${msg}</p>
@@ -37,7 +39,7 @@ export default class View {
 
 	renderError(msg = this._errorMessage) {
 		// prettier-ignore
-		const markup = 
+		const markup =
         `<div class="error">
             <div><svg><use href="${icons}#icon-alert-triangle"></use></svg></div>
             <p>${msg}</p>
