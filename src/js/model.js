@@ -4,6 +4,10 @@ import { newRequest } from './helpers';
 
 export const state = {
 	recipe: {},
+	search: {
+		query: '',
+		results: [],
+	},
 };
 
 export const loadRecipe = async function (recipeId) {
@@ -23,15 +27,27 @@ export const loadRecipe = async function (recipeId) {
 		};
 	} catch (err) {
 		console.error(`You got an error. ${err}`);
-
-		// 1. controller controlRecipe fn calls this method to loadRecipe
-		// 2. you cannot fetch the recipe (say bad id)
-		// 3. helper throws err in (2) and passes to model
-		// 4. model gets error, logs it "You got an error" and again throws it
-		// 5. controller controlRecipe fn catches err
-		// 6. calls recipeView.renderError(err) which displays error to user
-		// model -> controller -> view, chain of passing errors
-		// hence controller serves as a bridge
-		throw err; // to pass to controller
+		throw err;
 	}
 };
+
+export const loadSearchResults = async function (query) {
+	try {
+		const data = await newRequest(`${API_URL}?search=${query}`);
+		// console.log(data);
+
+		state.search.query = query;
+		state.search.results = data.data.recipes.map(recipe => ({
+			id: recipe.id,
+			title: recipe.title,
+			publisher: recipe.publisher,
+			imageUrl: recipe.image_url,
+		}));
+		console.log(state.search);
+	} catch (err) {
+		console.error(`You got an error. ${err}`);
+		throw err;
+	}
+};
+
+loadSearchResults('pizza');
