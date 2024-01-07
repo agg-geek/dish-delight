@@ -15,11 +15,9 @@ const controlRecipe = async function () {
 		recipeView.render(model.state.recipe);
 	} catch (err) {
 		console.log(err);
+		recipeView.renderError(`You got an error. ${err}`);
 	}
 };
-
-// you don't need to call this
-// controlRecipe();
 
 function init() {
 	recipeView.addHandlerRender(controlRecipe);

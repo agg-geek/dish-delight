@@ -22,9 +22,16 @@ export const loadRecipe = async function (recipeId) {
 			imageUrl: recipe.image_url,
 		};
 	} catch (err) {
-		// any error from newRequest function will be caught here
-		// and then we handle it ourselves here (by printing it)
-		// (even though this is just basic error handling at this point)
 		console.error(`You got an error. ${err}`);
+
+		// 1. controller controlRecipe fn calls this method to loadRecipe
+		// 2. you cannot fetch the recipe (say bad id)
+		// 3. helper throws err in (2) and passes to model
+		// 4. model gets error, logs it "You got an error" and again throws it
+		// 5. controller controlRecipe fn catches err
+		// 6. calls recipeView.renderError(err) which displays error to user
+		// model -> controller -> view, chain of passing errors
+		// hence controller serves as a bridge
+		throw err; // to pass to controller
 	}
 };
