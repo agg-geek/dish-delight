@@ -12,9 +12,6 @@ class RecipeView extends View {
 	}
 
 	addHandlerServings(handler) {
-		// you cannot select the btns parent div because the recipe might not have loaded (async)
-		// hence querySelector will return null
-		// this._parentElem.querySelector('.recipe__info-buttons').addEventListener('click', function (evt) {
 		this._parentElem.addEventListener('click', function (evt) {
 			const btn = evt.target.closest('.btn--update-servings');
 			if (!btn) return;

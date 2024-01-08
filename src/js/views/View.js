@@ -27,21 +27,11 @@ export default class View {
 
 		newElements.forEach((newEl, i) => {
 			const currEl = currElements[i];
-			// console.log(currEl, newEl.isEqualNode(currEl)); // the node and its parent both will have false
 
-			// updates the text
-			if (
-				!newEl.isEqualNode(currEl) &&
-				newEl.firstChild?.nodeValue.trim() !== '' // see explanation below (1)
-			) {
-				currEl.textContent = newEl.textContent; // see explanation below (2)
+			if (!newEl.isEqualNode(currEl) && newEl.firstChild?.nodeValue.trim() !== '') {
+				currEl.textContent = newEl.textContent;
 			}
 
-			// update the attributes of the changed nodes
-			// you will see that the servings btns only go to 3 and 5 always
-			// (since the default servings is always 4)
-			// the update-servings btns stores the data of the
-			// new servings in its data attribute, so update attributes
 			if (!newEl.isEqualNode(currEl)) {
 				Array.from(newEl.attributes).forEach(attr => currEl.setAttribute(attr.name, attr.value));
 			}
