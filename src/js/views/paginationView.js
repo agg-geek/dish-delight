@@ -25,12 +25,12 @@ class PaginationView extends View {
 		if (currPage === numPages) return this._generateBtnMarkup(currPage - 1, 1);
 	}
 
-	_generateBtnMarkup(currPage, prevBtn = 1) {
+	_generateBtnMarkup(pageNo, prevBtn = 1) {
 		return `<button class="btn--inline pagination__btn--${prevBtn ? 'prev' : 'next'}">
                     <svg class="search__icon">
                         <use href="${icons}#icon-arrow-${prevBtn ? 'left' : 'right'}"></use>
                     </svg>
-                    <span>Page ${currPage}</span>
+                    <span>Page ${pageNo}</span>
                 </button>`;
 	}
 }
