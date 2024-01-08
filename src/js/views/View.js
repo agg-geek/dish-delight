@@ -15,6 +15,21 @@ export default class View {
 		this._parentElem.insertAdjacentHTML('afterbegin', this._generateMarkup());
 	}
 
+	// when updating servings of recipes, we re-render the entire recipe view
+	// save this overhead by just updating the DOM selectively (DOM updating algorithm)
+	update(data) {
+		if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+
+		this._data = data;
+
+		const newMarkup = this._generateMarkup(); // we create new markup, but don't render it completely
+		const newDOM = document.createRange().createContextualFragment(newMarkup);
+		const newElements = newDOM.querySelectorAll('*');
+		console.log(newElements);
+		// checkout the innerHTML or textcontent of the servings value, etc
+		// they will be changed according to the new data
+	}
+
 	renderSpinner() {
 		// prettier-ignore
 		const html =
