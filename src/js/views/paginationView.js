@@ -9,8 +9,8 @@ class PaginationView extends View {
 			const btn = evt.target.closest('.btn--inline');
 			if (!btn) return; // as event delegation, if you click in the parent div space and not button
 
-			console.log(btn);
-			handler();
+			const goToPage = Number(btn.dataset.goto);
+			handler(goToPage);
 		});
 	}
 
@@ -36,7 +36,7 @@ class PaginationView extends View {
 	}
 
 	_generateBtnMarkup(pageNo, prevBtn = 1) {
-		return `<button class="btn--inline pagination__btn--${prevBtn ? 'prev' : 'next'}">
+		return `<button data-goto="${pageNo}" class="btn--inline pagination__btn--${prevBtn ? 'prev' : 'next'}">
                     <svg class="search__icon">
                         <use href="${icons}#icon-arrow-${prevBtn ? 'left' : 'right'}"></use>
                     </svg>

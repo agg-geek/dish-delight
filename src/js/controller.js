@@ -31,14 +31,15 @@ const controlSearchResults = async function () {
 
 	// Render the search results
 	// resultsView.render(model.state.search.results);
-	resultsView.render(model.getSearchResultsPage(2)); // test pagination buttons with different page values
+	resultsView.render(model.getSearchResultsPage()); // test pagination buttons with different page values
 
 	// Render the pagination buttons
 	paginationView.render(model.state.search);
 };
 
-const controlPagination = function () {
-	console.log('Pag control');
+const controlPagination = function (goToPage) {
+	resultsView.render(model.getSearchResultsPage(goToPage));
+	paginationView.render(model.state.search);
 };
 
 const init = function () {
