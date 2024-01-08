@@ -20,7 +20,7 @@ class RecipeView extends View {
 			if (!btn) return;
 
 			const newServings = Number(btn.dataset.newServings);
-			handler(newServings);
+			newServings > 0 && handler(newServings);
 		});
 	}
 
