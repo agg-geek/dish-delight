@@ -4,6 +4,16 @@ import View from './View.js';
 class PaginationView extends View {
 	_parentElem = document.querySelector('.pagination');
 
+	addHandlerBtnClick(handler) {
+		this._parentElem.addEventListener('click', function (evt) {
+			const btn = evt.target.closest('.btn--inline');
+			if (!btn) return; // as event delegation, if you click in the parent div space and not button
+
+			console.log(btn);
+			handler();
+		});
+	}
+
 	_generateMarkup() {
 		const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
 		const currPage = this._data.page;
