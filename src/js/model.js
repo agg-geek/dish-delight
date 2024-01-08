@@ -48,4 +48,8 @@ export const loadSearchResults = async function (query) {
 	}
 };
 
-loadSearchResults('pizza');
+export const getSearchResultsPage = function (page) {
+	const start = 10 * (page - 1);
+	const end = 10 * page;
+	return state.search.results.slice(start, end);
+};
