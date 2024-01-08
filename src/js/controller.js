@@ -1,9 +1,10 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as model from './model.js';
-import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
+import recipeView from './views/recipeView.js';
 
 const controlRecipe = async function () {
 	try {
@@ -27,8 +28,13 @@ const controlSearchResults = async function () {
 	if (!query) return;
 
 	await model.loadSearchResults(query);
+
+	// Render the search results
 	// resultsView.render(model.state.search.results);
-	resultsView.render(model.getSearchResultsPage());
+	resultsView.render(model.getSearchResultsPage(2)); // test pagination buttons with different page values
+
+	// Render the pagination buttons
+	paginationView.render(model.state.search);
 };
 
 const init = function () {
