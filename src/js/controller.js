@@ -28,7 +28,7 @@ const controlSearchResults = async function () {
 
 	await model.loadSearchResults(query);
 	// resultsView.render(model.state.search.results);
-	resultsView.render(model.getSearchResultsPage(2));
+	resultsView.render(model.getSearchResultsPage());
 };
 
 const init = function () {
