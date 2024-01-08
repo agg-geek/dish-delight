@@ -11,6 +11,19 @@ class RecipeView extends View {
 		['hashchange', 'load'].forEach(evt => window.addEventListener(evt, handler));
 	}
 
+	addHandlerServings(handler) {
+		// you cannot select the btns parent div because the recipe might not have loaded (async)
+		// hence querySelector will return null
+		// this._parentElem.querySelector('.recipe__info-buttons').addEventListener('click', function (evt) {
+		this._parentElem.addEventListener('click', function (evt) {
+			const btn = evt.target.closest('.btn--update-servings');
+			if (!btn) return;
+
+			const newServings = Number(btn.dataset.newServings);
+			handler(newServings);
+		});
+	}
+
 	_generateMarkup() {
 		return `<figure class="recipe__fig">
             <img src="${this._data.imageUrl}" alt="${this._data.title}" class="recipe__img" />
@@ -35,12 +48,12 @@ class RecipeView extends View {
                 <span class="recipe__info-text">servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn--tiny btn--increase-servings">
+                    <button class="btn--tiny btn--update-servings" data-new-servings="${this._data.servings - 1}">
                         <svg>
                             <use href="${icons}#icon-minus-circle"></use>
                         </svg>
                     </button>
-                    <button class="btn--tiny btn--increase-servings">
+                    <button class="btn--tiny btn--update-servings" data-new-servings="${this._data.servings + 1}">
                         <svg>
                             <use href="${icons}#icon-plus-circle"></use>
                         </svg>
