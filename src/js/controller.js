@@ -19,7 +19,7 @@ const controlRecipe = async function () {
 		// (downside: if you open the page from a link, then no search results
 		// so model.state.search.results is [] which causes resultsView render
 		// to display 'no results found for your query')
-		resultsView.render(model.getSearchResultsPage());
+		resultsView.update(model.getSearchResultsPage());
 
 		recipeView.renderSpinner();
 
