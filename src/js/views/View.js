@@ -29,6 +29,7 @@ export default class View {
 			const currEl = currElements[i];
 			// console.log(currEl, newEl.isEqualNode(currEl)); // the node and its parent both will have false
 
+			// updates the text
 			if (
 				!newEl.isEqualNode(currEl) &&
 				newEl.firstChild?.nodeValue.trim() !== '' // see explanation below (1)
@@ -36,12 +37,14 @@ export default class View {
 				currEl.textContent = newEl.textContent; // see explanation below (2)
 			}
 
-			// (1) -> change only if the element is a text node (not some parent etc)
-			// nodeValue returns the content of the text node if the elem is a textnode, null otherwise
-			// firstchild because newEl is an element, but its child is a text node
-			// also notice the firstchild?.
-
-			// (2) -> update curEl's textcontent (not newEl's)
+			// update the attributes of the changed nodes
+			// you will see that the servings btns only go to 3 and 5 always
+			// (since the default servings is always 4)
+			// the update-servings btns stores the data of the
+			// new servings in its data attribute, so update attributes
+			if (!newEl.isEqualNode(currEl)) {
+				Array.from(newEl.attributes).forEach(attr => currEl.setAttribute(attr.name, attr.value));
+			}
 		});
 	}
 
