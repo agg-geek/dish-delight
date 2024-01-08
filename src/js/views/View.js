@@ -15,19 +15,34 @@ export default class View {
 		this._parentElem.insertAdjacentHTML('afterbegin', this._generateMarkup());
 	}
 
-	// when updating servings of recipes, we re-render the entire recipe view
-	// save this overhead by just updating the DOM selectively (DOM updating algorithm)
 	update(data) {
 		if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
 
 		this._data = data;
 
-		const newMarkup = this._generateMarkup(); // we create new markup, but don't render it completely
+		const newMarkup = this._generateMarkup();
 		const newDOM = document.createRange().createContextualFragment(newMarkup);
-		const newElements = newDOM.querySelectorAll('*');
-		console.log(newElements);
-		// checkout the innerHTML or textcontent of the servings value, etc
-		// they will be changed according to the new data
+		const newElements = Array.from(newDOM.querySelectorAll('*'));
+		const currElements = Array.from(this._parentElem.querySelectorAll('*'));
+
+		newElements.forEach((newEl, i) => {
+			const currEl = currElements[i];
+			// console.log(currEl, newEl.isEqualNode(currEl)); // the node and its parent both will have false
+
+			if (
+				!newEl.isEqualNode(currEl) &&
+				newEl.firstChild?.nodeValue.trim() !== '' // see explanation below (1)
+			) {
+				currEl.textContent = newEl.textContent; // see explanation below (2)
+			}
+
+			// (1) -> change only if the element is a text node (not some parent etc)
+			// nodeValue returns the content of the text node if the elem is a textnode, null otherwise
+			// firstchild because newEl is an element, but its child is a text node
+			// also notice the firstchild?.
+
+			// (2) -> update curEl's textcontent (not newEl's)
+		});
 	}
 
 	renderSpinner() {
