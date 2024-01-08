@@ -11,6 +11,16 @@ const controlRecipe = async function () {
 		const recipeId = window.location.hash.slice(1);
 		if (!recipeId) return;
 
+		console.log(model.state.search.results);
+
+		// when you open a recipe, rerender the whole results page
+		// so that if you opened a recipe from the results,
+		// the recipe in results is shown active
+		// (downside: if you open the page from a link, then no search results
+		// so model.state.search.results is [] which causes resultsView render
+		// to display 'no results found for your query')
+		resultsView.render(model.getSearchResultsPage());
+
 		recipeView.renderSpinner();
 
 		await model.loadRecipe(recipeId);
