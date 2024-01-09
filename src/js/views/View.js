@@ -7,12 +7,15 @@ export default class View {
 		this._parentElem.innerHTML = '';
 	}
 
-	render(data) {
+	render(data, render = true) {
 		if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
 
 		this._data = data;
+		const markup = this._generateMarkup();
+		if (!render) return markup;
+
 		this._clearParentElem();
-		this._parentElem.insertAdjacentHTML('afterbegin', this._generateMarkup());
+		this._parentElem.insertAdjacentHTML('afterbegin', markup);
 	}
 
 	update(data) {
