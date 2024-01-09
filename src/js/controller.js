@@ -14,6 +14,10 @@ const controlRecipe = async function () {
 
 		resultsView.update(model.getSearchResultsPage());
 
+		// bookmarks list highlights only the latest bookmarked recipe
+		// remove highlight by rendering bookmarks list everytime new recipe is opened
+		bookmarksView.update(model.state.bookmarks);
+
 		recipeView.renderSpinner();
 
 		await model.loadRecipe(recipeId);
