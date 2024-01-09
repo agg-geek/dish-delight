@@ -28,6 +28,8 @@ export const loadRecipe = async function (recipeId) {
 			sourceUrl: recipe.source_url,
 			imageUrl: recipe.image_url,
 		};
+
+		state.recipe.bookmarked = state.bookmarks.some(bookmark => bookmark.id === recipeId);
 	} catch (err) {
 		console.error(`You got an error. ${err}`);
 		throw err;
