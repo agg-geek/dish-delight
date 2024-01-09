@@ -5,6 +5,7 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import recipeView from './views/recipeView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 const controlRecipe = async function () {
 	try {
@@ -47,10 +48,15 @@ const controlServings = function (servings) {
 };
 
 const controlAddBookmark = function () {
+	// 1. add/remove bookmarks
 	if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
 	else model.removeBookmark(model.state.recipe.id);
-	// console.log(model.state.recipe);
+
+	// render recipe as bookmarked
 	recipeView.update(model.state.recipe);
+
+	// render bookmarks in the bookmarks toggle (booksmarksView)
+	bookmarksView.render(model.state.bookmarks);
 };
 
 const init = function () {
