@@ -1,7 +1,7 @@
 {
-	"name": "forkify",
+	"name": "dish-delight",
 	"version": "1.0.0",
-	"description": "Forkify recipes app",
+	"description": "Dish Delight recipes app",
 	"main": "index.js",
 	"scripts": {
 		"start": "parcel index.html",
@@ -9,21 +9,19 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/agg-geek/jonas-forkify.git"
+		"url": "git+https://github.com/agg-geek/dish-delight.git"
 	},
 	"author": "Abhinav Aggarwal",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/agg-geek/jonas-forkify/issues"
+		"url": "https://github.com/agg-geek/dish-delight/issues"
 	},
-	"homepage": "https://github.com/agg-geek/jonas-forkify#readme",
+	"homepage": "https://github.com/agg-geek/dish-delight#readme",
 	"devDependencies": {
 		"@parcel/transformer-sass": "^2.11.0",
 		"parcel": "^2.11.0"
 	},
 	"dependencies": {
-		"core-js": "^3.35.0",
-		"fractional": "^1.0.0",
-		"regenerator-runtime": "^0.14.1"
+		"fractional": "^1.0.0"
 	}
 }

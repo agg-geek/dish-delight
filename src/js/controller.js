@@ -1,5 +1,3 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
@@ -61,7 +59,6 @@ const controlBookmarks = function () {
 };
 
 const init = function () {
-	// used to render the bookmarks from local storage
 	bookmarksView.addHandlerRender(controlBookmarks);
 	searchView.addHandlerSearch(controlSearchResults);
 	recipeView.addHandlerRender(controlRecipe);

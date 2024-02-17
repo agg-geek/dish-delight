@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { API_URL, RES_PER_PAGE } from './config';
 import { newRequest } from './helpers';
 
@@ -89,8 +88,6 @@ export const removeBookmark = function (recipeId) {
 	persistBookmarks();
 };
 
-// loads the bookmarks from local storage as soon as app starts
-// see init() below
 const init = function () {
 	const bookmarks = localStorage.getItem('bookmarks');
 	if (bookmarks) state.bookmarks = JSON.parse(bookmarks);
