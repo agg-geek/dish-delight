@@ -30,6 +30,8 @@ const controlSearchResults = async function () {
 	const query = searchView.getQuery();
 	if (!query) return;
 
+	resultsView.renderSpinner();
+
 	await model.loadSearchResults(query);
 
 	resultsView.render(model.getSearchResultsPage());
@@ -59,8 +61,27 @@ const controlBookmarks = function () {
 	bookmarksView.render(model.state.bookmarks);
 };
 
-const controlNewRecipe = function (newRecipe) {
-	console.log(newRecipe);
+const controlNewRecipe = async function (newRecipe) {
+	try {
+		newRecipeView.renderSpinner();
+
+		await model.uploadNewRecipe(newRecipe);
+		// the new recipe has already been added to the state
+		recipeView.render(model.state.recipe);
+
+		newRecipeView.renderMessage();
+
+		setTimeout(function () {
+			// toggleWindow after 2s because the renderMessage
+			// uses the parentElem, ie <form> itself
+			newRecipeView.toggleWindow();
+		}, 2000);
+	} catch (err) {
+		console.log(err);
+		// renderError renders the element in the parentElem,
+		// ie in the <form> element itself
+		newRecipeView.renderError(err.message);
+	}
 };
 
 const init = function () {

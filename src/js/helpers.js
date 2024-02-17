@@ -8,9 +8,22 @@ const timeout = function (s) {
 	});
 };
 
-export const newRequest = async function (url) {
+export const newRequest = async function (url, postReqData = null) {
 	try {
-		const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);
+		// if there is any post request data, then perform a post request
+		const requestOptions = {
+			...(postReqData && {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				// pass in the post data
+				body: JSON.stringify(postReqData),
+			}),
+		};
+
+		const res = await Promise.race([
+			fetch(url, requestOptions),
+			timeout(TIMEOUT_SEC),
+		]);
 		const data = await res.json();
 
 		if (!res.ok) throw new Error(`${data.message} (${res.status})`);

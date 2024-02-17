@@ -8,7 +8,8 @@ export default class View {
 	}
 
 	render(data, render = true) {
-		if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+		if (!data || (Array.isArray(data) && data.length === 0))
+			return this.renderError();
 
 		this._data = data;
 		const markup = this._generateMarkup();
@@ -34,7 +35,9 @@ export default class View {
 			}
 
 			if (!newEl.isEqualNode(currEl)) {
-				Array.from(newEl.attributes).forEach(attr => currEl.setAttribute(attr.name, attr.value));
+				Array.from(newEl.attributes).forEach(attr =>
+					currEl.setAttribute(attr.name, attr.value)
+				);
 			}
 		});
 	}
@@ -57,6 +60,7 @@ export default class View {
             <div><svg><use href="${icons}#icon-smile"></use></svg></div>
             <p>${msg}</p>
         </div>`
+
 		this._clearParentElem();
 		this._parentElem.insertAdjacentHTML('afterbegin', markup);
 	}
@@ -68,6 +72,7 @@ export default class View {
             <div><svg><use href="${icons}#icon-alert-triangle"></use></svg></div>
             <p>${msg}</p>
         </div>`
+
 		this._clearParentElem();
 		this._parentElem.insertAdjacentHTML('afterbegin', markup);
 	}
