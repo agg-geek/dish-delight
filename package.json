@@ -2,10 +2,10 @@
 	"name": "dish-delight",
 	"version": "1.0.0",
 	"description": "Dish Delight recipes app",
-	"main": "index.js",
+	"source": "index.html",
 	"scripts": {
 		"start": "parcel index.html",
-		"build": "parcel build index.html"
+		"build": "parcel build index.html --dist-dir ./dist"
 	},
 	"repository": {
 		"type": "git",
@@ -22,6 +22,6 @@
 		"parcel": "^2.11.0"
 	},
 	"dependencies": {
-		"fractional": "^1.0.0"
+		"fracty": "^1.0.11"
 	}
 }

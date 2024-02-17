@@ -1,4 +1,4 @@
-import { Fraction } from 'fractional';
+import fracty from 'fracty';
 import icons from 'url:../../img/icons.svg';
 import View from './View';
 
@@ -29,11 +29,6 @@ class RecipeView extends View {
 		});
 	}
 
-	// turn off whitespace and checkout below
-	// notice user--generated!
-	// it displays an icon if the recipe is created by the current user
-	// we send the key as query while making the API request and hence
-	// the user-created recipes also appear, which can be identified
 	_generateMarkup() {
 		return `<figure class="recipe__fig">
                     <img src="${this._data.imageUrl}" alt="${
@@ -133,7 +128,7 @@ class RecipeView extends View {
                         <use href="${icons}#icon-check"></use>
                     </svg>
                     <div class="recipe__quantity">${
-						ing.quantity ? new Fraction(ing.quantity).toString() : ''
+						ing.quantity ? fracty(ing.quantity).toString() : ''
 					}</div>
                     <div class="recipe__description">
                         <span class="recipe__unit">${ing.unit}</span>
