@@ -5,7 +5,15 @@
 	align-items: center;
 	justify-content: space-between;
 
-	&__logo {
+	.logo {
+		display: flex;
+		font-family: 'Dancing Script', cursive;
+		font-size: 30px;
+		font-weight: bold;
+	}
+
+	&__icon {
+		padding-right: 10px;
 		margin-left: 4rem;
 		height: 4.6rem;
 		display: block;
