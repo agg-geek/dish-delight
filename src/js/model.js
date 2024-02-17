@@ -28,7 +28,9 @@ const createRecipeObject = function (recipe) {
 
 export const loadRecipe = async function (recipeId) {
 	try {
-		const data = await newRequest(`${API_URL}/${recipeId}`);
+		// specify key while requesting a recipe so that if we request a recipe
+		// which is created by us, the API will actually send that recipe
+		const data = await newRequest(`${API_URL}/${recipeId}?key=${API_KEY}`);
 
 		const { recipe } = data.data;
 		state.recipe = createRecipeObject(recipe);
@@ -44,7 +46,9 @@ export const loadRecipe = async function (recipeId) {
 
 export const loadSearchResults = async function (query) {
 	try {
-		const data = await newRequest(`${API_URL}?search=${query}`);
+		// specify key while requesting a recipe so that the API also sends recipes
+		// created by us in the search
+		const data = await newRequest(`${API_URL}?search=${query}&key=${API_KEY}`);
 
 		state.search.query = query;
 		state.search.results = data.data.recipes.map(recipe => ({
@@ -52,6 +56,7 @@ export const loadSearchResults = async function (query) {
 			title: recipe.title,
 			publisher: recipe.publisher,
 			imageUrl: recipe.image_url,
+			...(recipe.key && { key: recipe.key }),
 		}));
 		state.search.page = 1;
 	} catch (err) {
