@@ -32,18 +32,13 @@ class NewRecipeView extends View {
 	addHandlerNewRecipe(handler) {
 		this._parentElem.addEventListener('submit', function (e) {
 			e.preventDefault();
-			// notice the format of the dataArr:
-			// ['name' (input.getattribute(name)), 'value' (input.value)]
 			const dataArr = [...new FormData(this)];
 			console.log(dataArr);
 
-			// fromEntries is reverse of arr.entries()
 			const dataObj = Object.fromEntries(dataArr);
 			handler(dataObj);
 		});
 	}
-
-	// _generateMarkup() {}
 }
 
 export default new NewRecipeView();

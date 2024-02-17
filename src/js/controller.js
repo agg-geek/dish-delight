@@ -66,20 +66,20 @@ const controlNewRecipe = async function (newRecipe) {
 		newRecipeView.renderSpinner();
 
 		await model.uploadNewRecipe(newRecipe);
-		// the new recipe has already been added to the state
-		recipeView.render(model.state.recipe);
 
 		newRecipeView.renderMessage();
-
 		setTimeout(function () {
-			// toggleWindow after 2s because the renderMessage
-			// uses the parentElem, ie <form> itself
 			newRecipeView.toggleWindow();
 		}, 2000);
+
+		// after creating the new recipe, we render it
+		recipeView.render(model.state.recipe);
+		// the hash url has not changed and the bookmarks view has not been updated
+		// so fix them
+		bookmarksView.render(model.state.bookmarks);
+		window.history.pushState(null, '', `#${model.state.recipe.id}`);
 	} catch (err) {
 		console.log(err);
-		// renderError renders the element in the parentElem,
-		// ie in the <form> element itself
 		newRecipeView.renderError(err.message);
 	}
 };

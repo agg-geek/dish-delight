@@ -10,12 +10,10 @@ const timeout = function (s) {
 
 export const newRequest = async function (url, postReqData = null) {
 	try {
-		// if there is any post request data, then perform a post request
 		const requestOptions = {
 			...(postReqData && {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				// pass in the post data
 				body: JSON.stringify(postReqData),
 			}),
 		};
