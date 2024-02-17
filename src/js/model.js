@@ -28,8 +28,6 @@ const createRecipeObject = function (recipe) {
 
 export const loadRecipe = async function (recipeId) {
 	try {
-		// specify key while requesting a recipe so that if we request a recipe
-		// which is created by us, the API will actually send that recipe
 		const data = await newRequest(`${API_URL}/${recipeId}?key=${API_KEY}`);
 
 		const { recipe } = data.data;
@@ -46,8 +44,6 @@ export const loadRecipe = async function (recipeId) {
 
 export const loadSearchResults = async function (query) {
 	try {
-		// specify key while requesting a recipe so that the API also sends recipes
-		// created by us in the search
 		const data = await newRequest(`${API_URL}?search=${query}&key=${API_KEY}`);
 
 		state.search.query = query;

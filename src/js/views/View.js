@@ -46,7 +46,7 @@ export default class View {
 		// prettier-ignore
 		const html =
         `<div class="spinner">
-            <svg><use href="${icons}.svg#icon-loader"></use></svg>
+            <svg><use href="${icons}#icon-loader"></use></svg>
         </div>`;
 
 		this._clearParentElem();

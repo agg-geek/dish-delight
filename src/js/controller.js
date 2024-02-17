@@ -72,10 +72,7 @@ const controlNewRecipe = async function (newRecipe) {
 			newRecipeView.toggleWindow();
 		}, 2000);
 
-		// after creating the new recipe, we render it
 		recipeView.render(model.state.recipe);
-		// the hash url has not changed and the bookmarks view has not been updated
-		// so fix them
 		bookmarksView.render(model.state.bookmarks);
 		window.history.pushState(null, '', `#${model.state.recipe.id}`);
 	} catch (err) {
