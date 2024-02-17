@@ -29,7 +29,9 @@ export const loadRecipe = async function (recipeId) {
 			imageUrl: recipe.image_url,
 		};
 
-		state.recipe.bookmarked = state.bookmarks.some(bookmark => bookmark.id === recipeId);
+		state.recipe.bookmarked = state.bookmarks.some(
+			bookmark => bookmark.id === recipeId
+		);
 	} catch (err) {
 		console.error(`You got an error. ${err}`);
 		throw err;
@@ -63,7 +65,9 @@ export const getSearchResultsPage = function (page = state.search.page) {
 };
 
 export const updateServings = function (servings) {
-	state.recipe.ingredients.forEach(ing => (ing.quantity = (ing.quantity * servings) / state.recipe.servings));
+	state.recipe.ingredients.forEach(
+		ing => (ing.quantity = (ing.quantity * servings) / state.recipe.servings)
+	);
 	state.recipe.servings = servings;
 };
 
@@ -84,3 +88,12 @@ export const removeBookmark = function (recipeId) {
 	if (recipeId === state.recipe.id) state.recipe.bookmarked = false;
 	persistBookmarks();
 };
+
+// loads the bookmarks from local storage as soon as app starts
+// see init() below
+const init = function () {
+	const bookmarks = localStorage.getItem('bookmarks');
+	if (bookmarks) state.bookmarks = JSON.parse(bookmarks);
+};
+
+init();

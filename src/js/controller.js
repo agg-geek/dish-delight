@@ -14,8 +14,6 @@ const controlRecipe = async function () {
 
 		resultsView.update(model.getSearchResultsPage());
 
-		// bookmarks list highlights only the latest bookmarked recipe
-		// remove highlight by rendering bookmarks list everytime new recipe is opened
 		bookmarksView.update(model.state.bookmarks);
 
 		recipeView.renderSpinner();
@@ -26,7 +24,6 @@ const controlRecipe = async function () {
 	} catch (err) {
 		console.log(err);
 		recipeView.renderError();
-		// recipeView.renderError(`You got an error. ${err}`);
 	}
 };
 
@@ -52,18 +49,20 @@ const controlServings = function (servings) {
 };
 
 const controlAddBookmark = function () {
-	// 1. add/remove bookmarks
 	if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
 	else model.removeBookmark(model.state.recipe.id);
 
-	// render recipe as bookmarked
 	recipeView.update(model.state.recipe);
+	bookmarksView.render(model.state.bookmarks);
+};
 
-	// render bookmarks in the bookmarks toggle (booksmarksView)
+const controlBookmarks = function () {
 	bookmarksView.render(model.state.bookmarks);
 };
 
 const init = function () {
+	// used to render the bookmarks from local storage
+	bookmarksView.addHandlerRender(controlBookmarks);
 	searchView.addHandlerSearch(controlSearchResults);
 	recipeView.addHandlerRender(controlRecipe);
 	recipeView.addHandlerServings(controlServings);
